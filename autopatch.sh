@@ -18,7 +18,7 @@ function gitinit
 {
     cd $androidroot/$1
 
-    tmpbranch=${branch}_googlepatch_$YEAR_$MONTH
+    tmpbranch=${branch}_googlepatch_${YEAR}_${MONTH}
     #git branch -D $tmpbranch
     git fetch origin $branch
     git checkout -b $tmpbranch -t origin/$branch
