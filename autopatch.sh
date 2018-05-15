@@ -11,12 +11,14 @@ EOF
 androidroot=$1
 patchroot=$2
 branch=$3
+YEAR=$4
+MONTH=$5
 
 function gitinit
 {
     cd $androidroot/$1
 
-    tmpbranch=${branch}_googlepatch_${RANDOM}
+    tmpbranch=${branch}_googlepatch_$YEAR_$MONTH
     #git branch -D $tmpbranch
     git fetch origin $branch
     git checkout -b $tmpbranch -t origin/$branch
