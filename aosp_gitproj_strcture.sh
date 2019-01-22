@@ -17,9 +17,10 @@ for middlepath in `find . -path "./manifest" -prune -o -type f -print | xargs di
 do
     # git init
     cd $androidroot/${middlepath:2}
-    git fetch origin $branch
-    git checkout -b $tmpbranch -t origin/$branch
-    git pull --rebase origin $branch
+    GITREMOTE=$(git remote)
+    git fetch $GITREMOTE $branch
+    git checkout -b $tmpbranch -t ${GITREMOTE}/$branch
+    git pull --rebase $GITREMOTE $branch
 
     # git apply
     for patch in `find $patchroot/${middlepath:2} -type f | sort`   # sort patch file in according to 0001,0002,...
@@ -45,7 +46,8 @@ if [ $continue == "y" ]; then
         cd $androidroot/${middlepath:2}
         git add -A
         git commit -s
-        git push origin HEAD:refs/for/$branch
+        GITREMOTE=$(git remote)
+        git push $GITREMOTE HEAD:refs/for/$branch
     done
 else
     echo "push commit manually"
