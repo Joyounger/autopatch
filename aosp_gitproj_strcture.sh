@@ -38,6 +38,7 @@ if [ $continue == "y" ]; then
     #read -p "input your git confle filename in ~/.ssh, eg: config or config.linyang " gitcfgfile
     #cp -f ~/.ssh/$gitcfgfile ~/.ssh/config
 
+    cd $patchroot
     for middlepath in `find . -path "./manifest" -prune -o -type f -print | xargs dirname | uniq | sort`
     do
         # git push
